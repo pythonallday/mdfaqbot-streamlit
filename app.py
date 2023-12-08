@@ -14,9 +14,6 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-import os
-import requests
-import datetime
 import openai
 import time
 
@@ -26,7 +23,7 @@ LOGGER = get_logger(__name__)
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
-openai.api_key = "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"
+
 
 # Set your OpenAI Assistant ID here
 assistant_id = 'asst_lTBM6xP6R035vIYpDLldY0Uc'
@@ -34,7 +31,7 @@ assistant_id = 'asst_lTBM6xP6R035vIYpDLldY0Uc'
 
 # Initialize the OpenAI client (ensure to set your API key in the sidebar within the app)
 client = openai
-
+client.api_key = "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"
 # Initialize session state variables for file IDs and chat control
 
 if "start_chat" not in st.session_state:
@@ -70,7 +67,7 @@ def home_page():
         st.session_state.openai_model = "gpt-3.5-turbo-1106"
     if "messages" not in st.session_state.keys(): # Initialize the chat messages history
         st.session_state.messages = [
-        {"role": "assistant", "content": "Wat zou je willen weten?"}
+        {"role": "assistant", "content": "Hoe kan ik jou helpen?"}
     ]
 
     # display existing messages in the chat
