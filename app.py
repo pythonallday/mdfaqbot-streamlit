@@ -31,7 +31,7 @@ assistant_id = 'asst_lTBM6xP6R035vIYpDLldY0Uc'
 
 # Initialize the OpenAI client (ensure to set your API key in the sidebar within the app)
 client = openai
-client.api_key = "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"
+client.api_key = "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"
 # Initialize session state variables for file IDs and chat control
 
 if "start_chat" not in st.session_state:
@@ -50,16 +50,10 @@ def home_page():
     st.title("MonkeyDonky veelgestelde vragen assistent")
     st.write("Stel hier jouw vraag en ik probeer jou zo goed mogelijk te helpen :)")
 
-
-    # button to start the chat session
-
     st.session_state.start_chat = True
     # create a thread once and store its id in session state
     thread = client.beta.threads.create()
     st.session_state.thread_id = thread.id
-
-
-
 
 
     # initialize the model and messages list if not already in session state
@@ -69,6 +63,8 @@ def home_page():
         st.session_state.messages = [
         {"role": "assistant", "content": "Hoe kan ik jou helpen?"}
     ]
+    else:
+        pass
 
     # display existing messages in the chat
     for message in st.session_state.messages:
@@ -96,9 +92,6 @@ def home_page():
                 instructions=""
             )
 
-
-
-
             # poll for the run to complete and retrieve the assistant's messages
             while run.status != 'completed':
                 time.sleep(1)
@@ -124,18 +117,10 @@ def home_page():
                     st.markdown(full_response, unsafe_allow_html=True)
 
 
-
-        if st.button('clear chat'):
-            clear_chat()
-            st.experimental_rerun()  # optional: rerender the page to reflect changes
-
+        
 
 def main():
     home_page()
-
-def clear_chat():
-    st.session_state.messages = []
-
 
 
 
